@@ -19,10 +19,9 @@ const blogs: Blog[] = [
     id: "1",
     title: "Data movement tools - Part 1 (Data Extraction)",
     date: "Nov 6, 2025",
-    excerpt:
-      "Challenges in building data movement tools - Part 1 (Data Extraction)",
+    excerpt: "Challenges in building data movement tools",
     content: `
-So here is the context. I currently work at a Series A company (Monad.com), where I work on building ETL flows for customers to move security data. I’ve been learning about this space for the last ~1.5 years, and this write up is generally an amalgamation of my learnings. 
+I currently work at a Series A company (Monad.com), where I work on building ETL flows for customers to move security data. I’ve been learning about this space for the last ~1.5 years, and this write up is generally an amalgamation of some of my learnings. 
 
 Setting the scenario: ETL stands for data extraction, transformation, and loading. Data extraction refers to the retrieval of data from any external source, which in a lot of cases is done via external platform APIs. This would involve hitting the third party provider’s API, where we would get the designated data from. The type of data could vary based on the usecase, but this could be anything from Audit logs to Customer event data to security vulnerabilities to system logs to data from object stores to any marketing data for example. Other ways of fetching data include publisher subsriber models (eg: salesforce events streams), where you could subscribe to a stream of data from a third party provider, and your service listening to data from that stream would receive that data and you would then process it. 
 

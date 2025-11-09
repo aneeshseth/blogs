@@ -15,9 +15,9 @@ const blogs: Blog[] = [
     id: "1",
     title: "Data movement tools - Part 1 (Data Extraction)",
     date: "Nov 5, 2025",
-    excerpt: "Challenges in building data movement tools - Part 1",
+    excerpt: "",
     content: `
-         So here is the context. I currently work at a Series A company (Monad.com), where I work on building ETL flows for customers to move security data. I’ve been learning about this space for the last ~1.5 years, and this write up is generally an amalgamation of my learnings.
+         I currently work at a Series A company (Monad.com), where I work on building ETL flows for customers to move security data. I’ve been learning about this space for the last ~1.5 years, and this write up is generally an amalgamation of some of my learnings.
       `,
   },
 ];
