@@ -20,6 +20,15 @@ const blogs: Blog[] = [
          I currently work at a Series A company (Monad.com), where I work on building ETL flows for customers to move security data. I’ve been learning about this space for the last ~1.5 years, and this write up is generally an amalgamation of some of my learnings.
       `,
   },
+  {
+    id: "2",
+    title: "Data movement tools - Part 2 (Data Loading)",
+    date: "Nov 12, 2025",
+    excerpt: "",
+    content: `
+         I currently work at a Monad.com, where I work on building ETL flows for customers to move security data. I’ve been learning about this space for the last ~1.5 years, and this write up is generally an amalgamation of some of my learnings.
+      `,
+  },
 ];
 
 export default function Home() {

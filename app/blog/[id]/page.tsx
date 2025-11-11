@@ -34,6 +34,23 @@ The more tricky parts are to create visibility into these extraction flows aroun
 These touch on a few challenges faced in building a data extraction service. The next iteration of this write up would be about some other part of this system.
       `,
   },
+  {
+    id: "2",
+    title: "Data movement tools - Part 2 (Data Loading)",
+    date: "Nov 12, 2025",
+    excerpt: "Challenges in building data movement tools",
+    content: `
+I currently work at Monad.com, where I work on building data heavy workflows for customers to move security data. I’ve been learning about this space for the last ~1.5 years, and this write up is generally an amalgamation of my learnings. 
+
+Setting the scenario: ETL stands for data extraction, transformation, and loading. Data extraction refers to the retrieval of data from any external source, which in a lot of cases is done via external platform APIs. This would involve hitting the third party provider’s API, where we would get the designated data from. The type of data could vary based on the usecase, but this could be anything from Audit logs to Customer event data to security vulnerabilities to system logs to data from object stores to any marketing data for example. The second step is transformation, which as the name suggests is a step that is involved in transforming the data, and the last step being load, which is to send the data to any form of data storage (a SIEM, a datalake, a database, an object store, etc). Data loading in most cases involves using the third party platform’s API/SDKs to send data in. 
+
+There are 2 main modes of sending data to a destination, firstly batching, and secondly individual records being sent. Sending individual data refers to sending each data record one after the other via the third party’s API after it has been extracted from the third party source in the extract step and has gone through data transformation too. The second method refers to batching data, which is to send N records to the destination in a single API call. Batching is generally considered more efficient, since it allows with dealing with potentially heavy throughput from the extract service. Most data lakes, popular SIEM’s, etc. support batching data. 
+
+The number N (which is total records to send in an API call to batch data into a destination) can vary based on the destination. These data lakes can usually send upto a certain number of records in a single call to their API, or are even limited by the size of data being sent in bytes. Dealing with heavy throughput on the load service coming from the extract service is an interesting challenge. For example, the extract service may be shredding out a TB worth of data within an hour or two since there is a very large amount of data in the customer’s third party source that’s being pulled from, however, it is not feasible to send a TB or even around a GB of data in a single batch API call to any service. Most services would return an error. This introduces the need for limiting batch sizes when calling the API, and this batch size can differ per destination connector. Batch sizes are usually measured by number of records and the size of the batch, hence, as data flows in from the extract and transform steps, we form batches which are eventually sent to the destination via their API. It is also important to consider backoffs, given if we hit rate limits, or if the destination (for example: snowflake) is down, we need to make sure we backoff at exponential time frames (concept called exponential backoffs). 
+
+Once we have data flowing, it is also important to look into how we can optimize time it takes to send N records to the destination platform through their API along with costs for the destination platform we’re sending data to for customers, and that could be through better handling of connection pooling with the destination to ensure high throughput, or making sure active connections are cleaned up, ensuring good error handling with backoffs based on the type of error, etc. This gets trickier when dealing with data warehouses like snowflake which present multiple ways to send data (by staging the data - https://docs.snowflake.com/en/user-guide/data-load-considerations-stage, or by doing direct inserts), and understanding tradeoffs there. 
+      `,
+  },
 ];
 
 export default function BlogPage() {
